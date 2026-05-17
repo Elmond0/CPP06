@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ScalarConverter.hpp>
+#include "ScalarConverter.hpp"
 
 ScalarConverter::ScalarConverter(){}
 
@@ -142,4 +142,73 @@ void ScalarConverter::printDouble(double val)
 	if (!(val - std::floor(val)))
 		std::cout << ".0";
 	std::cout << std::endl;
+}
+
+ScalarConverter::eType ScalarConverter::detect(std::string& lit)
+{
+	if (isCharLit(lit))   return CHAR;
+	if (isIntLit(lit))    return INT;
+	if (isFloatLit(lit))  return FLOAT;
+	if (isDoubleLit(lit)) return DOUBLE;
+	else                  return UNKNOWN;
+}
+
+void ScalarConverter::convert(std::string& lit)
+{
+	eType valueType = detect(lit);
+
+	if (valueType == UNKNOWN)
+	{
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		std::cout << "float: impossible" << std::endl;
+		std::cout << "double: impossible" << std::endl;
+		return;
+	}
+
+	double val = 0.0;
+	bool   imp_nbr = false;
+
+	switch (valueType)
+	{
+	case CHAR: {
+		char c = lit.length() == 3 ? lit[1] : lit[0];
+		val = static_cast<double>(c);
+		break;
+	}
+	case INT: {
+		std::istringstream iss(lit);
+		int i; iss >> i;
+		val = static_cast<double>(i);
+		break;
+	}
+	case FLOAT: {
+		if      (lit == "nanf")                        { imp_nbr = true; val = std::numeric_limits<float>::quiet_NaN(); }
+		else if (lit == "-inff")                       { imp_nbr = true; val = -std::numeric_limits<float>::infinity(); }
+		else if (lit == "+inff" || lit == "inff")      { imp_nbr = true; val = std::numeric_limits<float>::infinity(); }
+		else {
+			std::istringstream iss(lit);
+			float f; iss >> f;
+			val = static_cast<double>(f);
+		}
+		break;
+	}
+	case DOUBLE: {
+		if      (lit == "nan")                         { imp_nbr = true; val = std::numeric_limits<double>::quiet_NaN(); }
+		else if (lit == "-inf")                        { imp_nbr = true; val = -std::numeric_limits<double>::infinity(); }
+		else if (lit == "+inf" || lit == "inf")        { imp_nbr = true; val = std::numeric_limits<double>::infinity(); }
+		else {
+			std::istringstream iss(lit);
+			iss >> val;
+		}
+		break;
+	}
+	default:
+		break;
+	}
+
+	printChar(val, imp_nbr);
+	printInt(val, imp_nbr);
+	printFloat(val);
+	printDouble(val);
 }
