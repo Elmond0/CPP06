@@ -54,7 +54,7 @@ bool ScalarConverter::isDoubleLit(std::string &lit)
 {
 	if (lit == "-inf" || lit == "+inf" || lit == "nan" || lit == "inff" || lit == "inf")
 		return true;
-	if (lit.empty() || !lit.find('.'))
+	if (lit.empty() || lit.find('.') == std::string::npos)
 		return false;
 	std::istringstream in(lit);
 	double dnbr;
@@ -109,7 +109,7 @@ void ScalarConverter::printFloat(double val)
 		std::cout << "float: " << (val > 0 ? "+" : "-") << "inff" << std::endl;
 		return;
 	}
-	if (val < FLT_MIN || val > FLT_MAX)
+	if (val < -FLT_MAX || val > FLT_MAX)
 	{
 		std::cout << "float: impossible" << std::endl;
 		return;
@@ -133,7 +133,7 @@ void ScalarConverter::printDouble(double val)
 		std::cout << "double: " << (val > 0 ? "+" : "-") << "inf" << std::endl;
 		return;
 	}
-	if (val < DBL_MIN || val > DBL_MAX)
+	if (val < -DBL_MAX || val > DBL_MAX)
 	{
 		std::cout << "double: impossible" << std::endl;
 		return;
