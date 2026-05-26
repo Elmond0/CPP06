@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
+/*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 11:44:12 by miricci           #+#    #+#             */
-/*   Updated: 2026/04/01 15:13:59 by miricci          ###   ########.fr       */
+/*   Updated: 2026/05/20 13:34:36 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,8 @@ void					ScalarConverter::convert( std::string& lit ) {
 
 		return ;
 	}
+
+	std::cout << valueType;
 
 	double	val = 0.0;
 	bool	imp_nbr = false;

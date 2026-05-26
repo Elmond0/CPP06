@@ -6,7 +6,7 @@
 /*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 10:07:51 by elmondo           #+#    #+#             */
-/*   Updated: 2026/05/06 11:56:30 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/05/20 13:32:40 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ bool ScalarConverter::isFloatLit(std::string &lit)
 
 bool ScalarConverter::isDoubleLit(std::string &lit)
 {
-	if (lit == "-inf" || lit == "+inf" || lit == "nan" || lit == "inff" || lit == "inf")
+	if (lit == "-inf" || lit == "+inf" || lit == "nan" || lit == "inf")
 		return true;
 	if (lit.empty() || lit.find('.') == std::string::npos)
 		return false;
@@ -133,7 +133,7 @@ void ScalarConverter::printDouble(double val)
 		std::cout << "double: " << (val > 0 ? "+" : "-") << "inf" << std::endl;
 		return;
 	}
-	if (val < -DBL_MAX || val > DBL_MAX)
+	if (val < DBL_MAX || val > DBL_MAX)
 	{
 		std::cout << "double: impossible" << std::endl;
 		return;
