@@ -21,6 +21,7 @@
 #include <cerrno>
 #include <climits>
 #include <cfloat>
+#include <iomanip>
 
 class ScalarConverter
 {

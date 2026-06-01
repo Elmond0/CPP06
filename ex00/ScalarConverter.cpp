@@ -89,12 +89,12 @@ void ScalarConverter::printInt(double val, bool imp_nbr)
 		std::cout << "int: impossible" << std::endl;
 		return;
 	}
-	if (val < static_cast<double>(INT_MIN) || val > static_cast<double>(INT_MAX) || val != floor(val))
+	if (val < static_cast<double>(INT_MIN) || val > static_cast<double>(INT_MAX))
 	{
 		std::cout << "int: impossible" << std::endl;
 		return;
 	}
-	std::cout << "int: " << static_cast<int>(val) << std::endl;
+	std::cout << "int: " << static_cast<int>(round(val)) << std::endl;
 }
 
 void ScalarConverter::printFloat(double val)
@@ -115,10 +115,7 @@ void ScalarConverter::printFloat(double val)
 		return;
 	}
 	float f = static_cast<float>(val);
-	std::cout << "float: " << f;
-	if (!(val - std::floor(val)))
-		std::cout << ".0";
-	std::cout << "f" << std::endl;
+	std::cout << std::fixed << std::setprecision(1) << "float: " << f << "f" << std::endl;
 }
 
 void ScalarConverter::printDouble(double val)
@@ -133,10 +130,7 @@ void ScalarConverter::printDouble(double val)
 		std::cout << "double: " << (val > 0 ? "+" : "-") << "inf" << std::endl;
 		return;
 	}
-std::cout << "double: " << static_cast<double>(val);
-	if (!(val - std::floor(val)))
-		std::cout << ".0";
-	std::cout << std::endl;
+	std::cout << std::fixed << std::setprecision(1) << "double: " << val << std::endl;
 }
 
 ScalarConverter::eType ScalarConverter::detect(std::string& lit)
