@@ -6,7 +6,7 @@
 /*   By: elmondo <elmondo@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 00:00:00 by elmondo           #+#    #+#             */
-/*   Updated: 2026/05/17 17:00:01 by elmondo          ###   ########.fr       */
+/*   Updated: 2026/06/01 15:41:17 by elmondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,15 @@ void	identify( Base* p )
 	else                          { std::clog << "Error" << std::endl; }
 }
 
-void	identify( Base& p )
+void	identify(Base& p)
 {
-	if      (dynamic_cast<A*>(&p)) { std::cout << "A" << std::endl; }
-	else if (dynamic_cast<B*>(&p)) { std::cout << "B" << std::endl; }
-	else if (dynamic_cast<C*>(&p)) { std::cout << "C" << std::endl; }
-	else                           { std::clog << "Error" << std::endl; }
+	try { (void)dynamic_cast<A&>(p); std::cout << "A" << std::endl; return; }
+	catch (...) {}
+	try { (void)dynamic_cast<B&>(p); std::cout << "B" << std::endl; return; }
+	catch (...) {}
+	try { (void)dynamic_cast<C&>(p); std::cout << "C" << std::endl; return; }
+	catch (...) {}
+	std::clog << "Error" << std::endl;
 }
 
 int	main( void )
