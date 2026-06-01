@@ -133,12 +133,7 @@ void ScalarConverter::printDouble(double val)
 		std::cout << "double: " << (val > 0 ? "+" : "-") << "inf" << std::endl;
 		return;
 	}
-	if (val < DBL_MAX || val > DBL_MAX)
-	{
-		std::cout << "double: impossible" << std::endl;
-		return;
-	}
-	std::cout << "double: " << static_cast<double>(val);
+std::cout << "double: " << static_cast<double>(val);
 	if (!(val - std::floor(val)))
 		std::cout << ".0";
 	std::cout << std::endl;
