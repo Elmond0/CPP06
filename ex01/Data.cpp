@@ -19,6 +19,6 @@ int		Data::getX( void ) const { return _x; }
 int		Data::getY( void ) const { return _y; }
 
 std::ostream&	operator<<( std::ostream& o, Data const & d ) {
-	o << "( " << d.getX() << ", " << d.getY() << " )";
+	o << "(" << d.getX() << ", " << d.getY() << ")";
 	return o;
 }
